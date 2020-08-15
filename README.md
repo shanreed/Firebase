@@ -2,16 +2,17 @@
 - configuration in firebase general ascroll down to app and pick configuration
 
 
-[ ] Create project on Firebase website
-[ ] Configure firebase in your app
-    [ ] Create firebase.js file and add configuration from your firebase project
-[ ] Turn on Datbase
-    [ ] click the database tab and then click create database
-    [ ] start a collection
-[ ] Connect to database
-    [ ] import firebase/firestore `import 'firebase/firestore';`
-    [ ] import firestore from firebase `import { firestore } from './firebase';`
-[ ] Get from database
+[x] Create project on Firebase website
+[x] Configure firebase in your app
+    [x] Create firebase.js file and add configuration from your firebase project
+[x] Turn on Datbase
+    [x] click the database tab and then click create database
+    [x] start a collection
+[x] Connect to database
+    [x] import firebase/firestore `import 'firebase/firestore';`
+    [x] import firestore from firebase `import { firestore } from './firebase';`
+[x] Get from database
     [ ] add the get request (componentDidMount)
 [ ] Add to database
     [ ]
+[ ] Delete from database

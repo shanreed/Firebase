@@ -74,6 +74,8 @@ class App extends Component {
 
   handleRemove = async (id) => {
     const allPosts = this.state.posts;// all the post
+
+    await firestore.doc(`post/${id}`).delete();//removes it from database
     const posts = allPosts.filter(post => post.id !== id);//get the post out of the array
     this.setState({ posts })//removes the post from state
   }

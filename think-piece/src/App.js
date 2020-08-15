@@ -9,15 +9,29 @@ class App extends Component {
     posts: [],
   };
 
+  unsubscribe = null;
+
 
   componentDidMount = async () => {
-    //await for the firestore collection
-    const snapshot = await firestore.collection('post').get()
-    //go through the snapshot of the database and map them into objects
-            const posts = snapshot.docs.map(collectData)//function is extracted into the utils.js file
-            //Set the state
-            this.setState({posts})
-                  }
+    this.unsubscribe = firestore.collection('post').onSnapshot(snapShot => {
+      const posts = snapShot.docs.map(collectData);
+      this.setState({posts})
+    })
+  }
+
+  componentWillUnmount = () => {
+    this.unsubscribe();
+  }
+
+
+  // componentDidMount = async () => {
+  //   //await for the firestore collection
+  //   const snapshot = await firestore.collection('post').get()
+  //   //go through the snapshot of the database and map them into objects
+  //           const posts = snapshot.docs.map(collectData)//function is extracted into the utils.js file
+  //           //Set the state
+  //           this.setState({posts})
+  //                 }
 
                   // componentDidMount = async () => {
                   //   //await for the firestore collection
@@ -64,21 +78,14 @@ class App extends Component {
   //   console.log({posts})
   
 //Add Post to database
-  handleCreate = async post => {
-    const { posts } = this.state;
-    const documentReference = await firestore.collection('post').add(post);
-    const doc = await documentReference.get();
-    const newPost = collectData(doc);
-    this.setState({ posts: [newPost, ...posts] });
-  };
+  // handleCreate = post => {
+  //    firestore.collection('post').add(post);
+   
+  // };
 
-  handleRemove = async (id) => {
-    const allPosts = this.state.posts;// all the post
-
-    await firestore.doc(`post/${id}`).delete();//removes it from database
-    const posts = allPosts.filter(post => post.id !== id);//get the post out of the array
-    this.setState({ posts })//removes the post from state
-  }
+  // handleRemove = async (id) => {
+  //   firestore.doc(`post/${id}`).delete();//removes it from database
+  // }
 
   render() {
     const { posts } = this.state;
@@ -86,7 +93,7 @@ class App extends Component {
     return (
       <main className="Application">
         <h1>Think Piece</h1>
-        <Posts posts={posts} onCreate={this.handleCreate} onRemove = {this.handleRemove} />
+        <Posts posts={posts}/>
       </main>
     );
   }

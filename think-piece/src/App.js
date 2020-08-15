@@ -6,7 +6,7 @@ import Posts from './components/Posts';
 
 class App extends Component {
   state = {
-    posts: [ ],
+    posts: [],
   };
 
 
@@ -63,10 +63,13 @@ class App extends Component {
     
   //   console.log({posts})
   
-
-  handleCreate = post => {
+//Add Post to database
+  handleCreate = async post => {
     const { posts } = this.state;
-    this.setState({ posts: [post, ...posts] });
+    const documentReference = await firestore.collection('post').add(post);
+    const doc = await documentReference.get();
+    const newPost = collectData(doc);
+    this.setState({ posts: [newPost, ...posts] });
   };
 
   render() {

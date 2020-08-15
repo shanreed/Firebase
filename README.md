@@ -11,4 +11,7 @@
 [ ] Connect to database
     [ ] import firebase/firestore `import 'firebase/firestore';`
     [ ] import firestore from firebase `import { firestore } from './firebase';`
+[ ] Get from database
     [ ] add the get request (componentDidMount)
+[ ] Add to database
+    [ ]

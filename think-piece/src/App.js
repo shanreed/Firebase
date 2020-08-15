@@ -72,13 +72,19 @@ class App extends Component {
     this.setState({ posts: [newPost, ...posts] });
   };
 
+  handleRemove = async (id) => {
+    const allPosts = this.state.posts;// all the post
+    const posts = allPosts.filter(post => post.id !== id);//get the post out of the array
+    this.setState({ posts })//removes the post from state
+  }
+
   render() {
     const { posts } = this.state;
 
     return (
       <main className="Application">
         <h1>Think Piece</h1>
-        <Posts posts={posts} onCreate={this.handleCreate} />
+        <Posts posts={posts} onCreate={this.handleCreate} onRemove = {this.handleRemove} />
       </main>
     );
   }

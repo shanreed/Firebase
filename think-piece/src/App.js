@@ -9,15 +9,29 @@ class App extends Component {
     posts: [],
   };
 
+  unsubscribe = null;
+
 
   componentDidMount = async () => {
-    //await for the firestore collection
-    const snapshot = await firestore.collection('post').get()
-    //go through the snapshot of the database and map them into objects
-            const posts = snapshot.docs.map(collectData)//function is extracted into the utils.js file
-            //Set the state
-            this.setState({posts})
-                  }
+    this.unsubscribe = firestore.collection('post').onSnapshot(snapShot => {
+      const posts = snapShot.docs.map(collectData);
+      this.setState({posts})
+    })
+  }
+
+  componentWillUnmount = () => {
+    this.unsubscribe();
+  }
+
+
+  // componentDidMount = async () => {
+  //   //await for the firestore collection
+  //   const snapshot = await firestore.collection('post').get()
+  //   //go through the snapshot of the database and map them into objects
+  //           const posts = snapshot.docs.map(collectData)//function is extracted into the utils.js file
+  //           //Set the state
+  //           this.setState({posts})
+  //                 }
 
                   // componentDidMount = async () => {
                   //   //await for the firestore collection

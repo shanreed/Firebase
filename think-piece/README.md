@@ -18,7 +18,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 #Firebase
 - `npm install --save firebase`
 - `npm install -g firebase-tools`
-- ` npm install --save firebase-admin`
+- `npm install --save firebase-admin`
 
 #Create firbase.js
 - configure firebase

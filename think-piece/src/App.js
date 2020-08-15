@@ -1,40 +1,12 @@
 import React, { Component } from 'react';
 import { firestore } from './firebase';
+import { collectData} from './utils'
 
 import Posts from './components/Posts';
 
 class App extends Component {
   state = {
-    posts: [
-      {
-        id: '1',
-        title: 'A Very Hot Take',
-        content:
-          'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Perferendis suscipit repellendus modi unde cumque, fugit in ad necessitatibus eos sed quasi et! Commodi repudiandae tempora ipsum fugiat. Quam, officia excepturi!',
-        user: {
-          uid: '123',
-          displayName: 'Bill Murray',
-          email: 'billmurray@mailinator.com',
-          photoURL: 'https://www.fillmurray.com/300/300',
-        },
-        stars: 1,
-        comments: 47,
-      },
-      {
-        id: '2',
-        title: 'The Sauciest of Opinions',
-        content:
-          'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Perferendis suscipit repellendus modi unde cumque, fugit in ad necessitatibus eos sed quasi et! Commodi repudiandae tempora ipsum fugiat. Quam, officia excepturi!',
-        user: {
-          uid: '456',
-          displayName: 'Mill Burray',
-          email: 'notbillmurray@mailinator.com',
-          photoURL: 'https://www.fillmurray.com/400/400',
-        },
-        stars: 3,
-        comments: 0,
-      },
-    ],
+    posts: [ ],
   };
 
 
@@ -42,12 +14,20 @@ class App extends Component {
     //await for the firestore collection
     const snapshot = await firestore.collection('post').get()
     //go through the snapshot of the database and map them into objects
-            const posts = snapshot.docs.map(doc => { return {id: doc.id, ...doc.data()}})
+            const posts = snapshot.docs.map(collectData)//function is extracted into the utils.js file
             //Set the state
             this.setState({posts})
                   }
 
-
+                  // componentDidMount = async () => {
+                  //   //await for the firestore collection
+                  //   const snapshot = await firestore.collection('post').get()
+                  //   //go through the snapshot of the database and map them into objects
+                  //           const posts = snapshot.docs.map(doc => { return {id: doc.id, ...doc.data()}})
+                  //           //Set the state
+                  //           this.setState({posts})
+                  //                 }
+                
 
 
 
@@ -82,7 +62,7 @@ class App extends Component {
   //                 })
     
   //   console.log({posts})
-  // }
+  
 
   handleCreate = post => {
     const { posts } = this.state;

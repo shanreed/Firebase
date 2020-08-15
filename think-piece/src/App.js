@@ -39,16 +39,29 @@ class App extends Component {
 
 
   componentDidMount = async () => {
-    //await will wait for the promise to reslove
+    //await for the firestore collection
     const snapshot = await firestore.collection('post').get()
-                  snapshot.forEach(doc => {
-                    const id = doc.id;
-                    const data = doc.data();
-                    console.log({ id, data});
-                    
-                  })
-                    console.log({snapshot});//returns a query snapshot
+    //go through the snapshot of the database and map them into objects
+            const posts = snapshot.docs.map(doc => { return {id: doc.id, ...doc.data()}})
+            //Set the state
+            this.setState({posts})
                   }
+
+
+
+
+
+  // componentDidMount = async () => {
+  //   //await will wait for the promise to reslove
+  //   const snapshot = await firestore.collection('post').get()
+  //                 snapshot.forEach(doc => {
+  //                   const id = doc.id;
+  //                   const data = doc.data();
+  //                   console.log({ id, data});
+                    
+  //                 })
+  //                   console.log({snapshot});//returns a query snapshot
+  //                 }
 
 //With aysnc and await
   // componentDidMount = async () => {

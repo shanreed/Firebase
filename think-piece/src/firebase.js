@@ -1,4 +1,5 @@
 import firebase from 'firebase/app';
+import 'firebase/firestore';
 
 var config = {
     apiKey: "AIzaSyCpOkN7yVjdW_1dJKf8tCH2TyYQJV3iJiY",
@@ -13,6 +14,8 @@ var config = {
 
   firebase.initializeApp(config);
 
+  export const firestore = firebase.firestore();
+
   window.firebase = firebase;
-  
+
   export default firebase;

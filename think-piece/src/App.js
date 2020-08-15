@@ -37,6 +37,40 @@ class App extends Component {
     ],
   };
 
+
+  componentDidMount = async () => {
+    //await will wait for the promise to reslove
+    const snapshot = await firestore.collection('post').get()
+                  snapshot.forEach(doc => {
+                    const id = doc.id;
+                    const data = doc.data();
+                    console.log({ id, data});
+                    
+                  })
+                    console.log({snapshot});//returns a query snapshot
+                  }
+
+//With aysnc and await
+  // componentDidMount = async () => {
+  //   const snapshot = await firestore//await will wait for the promise to reslove
+  //                 .collection('posts')
+  //                 .get()
+  //                   console.log({snapshot});//returns a query snapshot
+  //                 }
+
+
+//Without aysnc and await
+  // componentDidMount = () => {
+  //   const posts = firestore
+  //                 .collection('posts')
+  //                 .get()
+  //                 .then(snapshot => {
+  //                   console.log({snapshot});//returns a query snapshot
+  //                 })
+    
+  //   console.log({posts})
+  // }
+
   handleCreate = post => {
     const { posts } = this.state;
     this.setState({ posts: [post, ...posts] });

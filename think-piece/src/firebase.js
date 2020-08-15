@@ -17,5 +17,6 @@ var config = {
   export const firestore = firebase.firestore();
 
   window.firebase = firebase;
+  
 
   export default firebase;

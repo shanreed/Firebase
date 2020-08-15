@@ -43,4 +43,50 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 
 # Turn on Database
+The firebase store returns two major objects
+- *Query Snapshot*
+- *Document Snapshot*
 
+##Snapshots
+- are objects that represent the data
+- its the real time database 
+- when data is requested we will get back a snapshot
+- **Query Snapshot** - collection of things
+- **Document Snapshot** - document 
+
+###Query Snapshots Properties
+
+| Property        | Holds         
+| ------------- |:-------------:|
+| docs     | all documents in snapshot |
+| empty     | boolean that lets you know if the snapshot was empty      |
+| metadata| metadata concernong its source and if it has local modifications      |
+|query| a reference to the query that was fired|
+|size| number of documents in the Query Snapshot
+
+###Query Snapshots Methods
+
+| Method        | Holds         
+| ------------- |:-------------:|
+| docChanges()     | array of changes since last snapshot |
+| forEach()    | iterates over the entire array of snapshots      |
+| isEqual()| lets you know if it matches another snapshot      |
+
+**Query snapshots typically hold onto a number of Query Document Snapshots, which inherit from Document Snapshots**
+###Documnet Snapshots Properties
+
+| Method        | Holds         
+| ------------- |:-------------:|
+| id     | the id of the given document |
+| exists   | is this in the datatbase      |
+| metadata| metadata concernong its source and if it has local modifications      |
+|ref | reference to the documents location in the database
+
+
+###Documents Snapshots Methods
+
+| Method        | Holds         
+| ------------- |:-------------:|
+| data()     | array of changes since last snapshot|
+| get()    | allows you to access a particular property on the object|
+| isEqual()| for comparisons|

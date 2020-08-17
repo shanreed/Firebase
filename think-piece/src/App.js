@@ -3,10 +3,11 @@ import { firestore } from './firebase';
 import { collectData} from './utils'
 
 import Posts from './components/Posts';
-
+import Authentication from './components/Authentication';
 class App extends Component {
   state = {
     posts: [],
+    user: null,
   };
 
   unsubscribe = null;
@@ -88,11 +89,12 @@ class App extends Component {
   // }
 
   render() {
-    const { posts } = this.state;
+    const { posts, user } = this.state;
 
     return (
       <main className="Application">
         <h1>Think Piece</h1>
+        <Authentication user = {user} />
         <Posts posts={posts}/>
       </main>
     );

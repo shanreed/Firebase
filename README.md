@@ -12,7 +12,10 @@
     [x] import firebase/firestore `import 'firebase/firestore';`
     [x] import firestore from firebase `import { firestore } from './firebase';`
 [x] Get from database
-    [ ] add the get request (componentDidMount)
-[ ] Add to database
+    [x] add the get request (componentDidMount)
+[x] Add to database
     [ ]
-[ ] Delete from database
+[x] Delete from database
+[x] Update Ui with database so we wont have to keep fetching the data
+[x] Adding Stars
+[x] Converting Javascript Date object

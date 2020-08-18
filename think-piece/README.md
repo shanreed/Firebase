@@ -90,3 +90,67 @@ The firebase store returns two major objects
 | data()     | array of changes since last snapshot|
 | get()    | allows you to access a particular property on the object|
 | isEqual()| for comparisons|
+
+
+
+####Security Rules
+- are all or nothing
+- you can limit the size of a query so that malicious users(or you after a big lunch) cant run exspensive queries
+- allow list if request.query.limit <= 10;
+- we define what a given user is allowed to do and firebase does all the rest for us
+- cloud firestore rules always follow this structure 
+
+            service cloud.firestore {
+                //match /database/{database}/documents {
+                    //...
+                }
+            }
+
+- { database }  will always be the default database
+- by default everything is blacklisted, you turn on certain abilities
+- we can whitelist actions
+- if you turn on read
+    - get
+    - list
+- if you turn on write
+    - create
+    - update
+    - delete
+
+
+####Nest Rules to sub-collections
+- if you want to match all the way down `{document=**}` will go the rest of the way down with the rules
+- if multiple rules match then the operation is allowed if any of them are true
+
+                service cloud.firestore {
+                                //match /database/{database}/documents {
+                                    match/posts/{postId} {
+                                        match/comments/{comment} {
+                                            allow read, write: if condition;
+                                        }
+                                    }
+                                }
+                            }
+
+[Example-1: A user can read or write to any post, only if the req auth id is not null](example1.jpg)
+[Example-2: Modify your own data](example2.jpg)
+
+###Validating Based on the Document
+- All you have when responding to a document creation is `resource.data` and `request.resource.data`
+- `resource.data` will have the fields on the document as it is stored in the database, all fields currently in the database
+- `request.resource.data` will have the incoming document, incoming or changed fields
+
+###Accessing Other documents
+- `exists(/database/$(database)/documents/users/$(request.auth.uid))` will verify that a document exists.
+- get`(/database/$(database)/document/users/$(request.auth.uid)).data` will get you the data of another document
+
+
+- This is what we have by default, allows whoever and whatever to read and write
+
+        service cloud.firestore {
+                        //match /databases/{database}/documents {
+                            match/{document=**} {
+                                allow, read write
+                            }
+                        }
+                    }

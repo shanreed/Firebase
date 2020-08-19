@@ -43,3 +43,5 @@
 [ ] Implement SignOut
 
 ####Security Rules
+[ ] Authenticate users
+[ ] Validate what the user can and cannot do

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { firestore, auth } from '../firebase';
+import { firestore, auth, createUserProfileDocument } from '../firebase';
 class SignUp extends Component {
   state = { displayName: '', email: '', password: '' };
 
@@ -17,9 +17,9 @@ class SignUp extends Component {
       const { user } = await auth.createUserWithEmailAndPassword(email, password)
 
       // this will cause the displayName to be set after we login so we will need to refresh the page to see it
-      user.updateProfile({ displayName });
+      // user.updateProfile({ displayName });
 
-      // createUserProfileDocument(user, { displayName });
+      createUserProfileDocument(user, { displayName });
   } catch(err) {
     console.error(err);
   }

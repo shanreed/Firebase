@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { firestore, auth } from './firebase';
+import { firestore, auth, createUserProfileDocument } from './firebase';
 import { collectData} from './utils'
 
 import Posts from './components/Posts';
@@ -19,7 +19,10 @@ class App extends Component {
       const posts = snapShot.docs.map(collectData);
       this.setState({posts})
     })
-      this.unsubscribeFromAuth = auth.onAuthStateChanged(user => {//will change whenever a user losin or logs out
+      this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {//will change whenever a user losin or logs out
+        
+        const user = await createUserProfileDocument(userAuth);
+            console.log(user);
         this.setState({user})
       }) 
   };

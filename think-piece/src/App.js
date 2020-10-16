@@ -5,31 +5,9 @@ import { collectData} from './utils'
 
 import Posts from './components/Posts';
 import Authentication from './components/Authentication';
+
+
 class App extends Component {
-  state = {
-    
-    user: null,
-  };
-
- 
-  unsubscribeFromAuth = null;
-
-
-  componentDidMount = async () => {
-      this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {//will change whenever a user losin or logs out
-        
-        const user = await createUserProfileDocument(userAuth);
-            console.log(user);
-        this.setState({user})
-      }) 
-  };
-
-
-  componentWillUnmount = () => {
-    this.unsubscribeFromAuth();
-  }
-
-
   // componentDidMount = async () => {
   //   //await for the firestore collection
   //   const snapshot = await firestore.collection('post').get()
@@ -94,12 +72,11 @@ class App extends Component {
   // }
 
   render() {
-    const { posts, user } = this.state;
 
     return (
       <main className="Application">
         <h1>Think Piece</h1>
-        <Authentication user = {user} />
+        <Authentication/>
         <Posts/>
       </main>
     );

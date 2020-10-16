@@ -52,3 +52,7 @@
 -------
 
 UI Permissions
+
+#### Context API
+**The code for hooking up to firebase and passing it down to components can be extracted out and passed to only the components that need it using the context api that comes with react**
+- [ ] 

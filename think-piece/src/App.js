@@ -7,19 +7,15 @@ import Posts from './components/Posts';
 import Authentication from './components/Authentication';
 class App extends Component {
   state = {
-    posts: [],
+    
     user: null,
   };
 
-  unsubscribeFromFirestore = null;
+ 
   unsubscribeFromAuth = null;
 
 
   componentDidMount = async () => {
-    this.unsubscribeFromFirestore = firestore.collection('post').onSnapshot(snapShot => {
-      const posts = snapShot.docs.map(collectData);
-      this.setState({posts})
-    })
       this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {//will change whenever a user losin or logs out
         
         const user = await createUserProfileDocument(userAuth);
@@ -30,7 +26,7 @@ class App extends Component {
 
 
   componentWillUnmount = () => {
-    this.unsubscribe();
+    this.unsubscribeFromAuth();
   }
 
 
@@ -104,7 +100,7 @@ class App extends Component {
       <main className="Application">
         <h1>Think Piece</h1>
         <Authentication user = {user} />
-        <Posts posts={posts}/>
+        <Posts/>
       </main>
     );
   }

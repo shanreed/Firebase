@@ -22,9 +22,9 @@ const Posts = () => {
   return (
     <section className="Posts">
       <AddPost/>
-      <PostsContext.Consumer>
-          {posts => posts.map(post => <Post {...post} key={post.id}/>)}
-      </PostsContext.Consumer>
+      {/* <PostsContext.Consumer> */}
+          {posts.map(post => <Post {...post} key={post.id}/>)}
+      {/* </PostsContext.Consumer> */}
         
     </section>
   )

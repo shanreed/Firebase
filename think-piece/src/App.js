@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import { firestore, auth, createUserProfileDocument } from './firebase';
-import { collectData} from './utils'
-
+import { Switch, Route, Link} from 'react-router-dom';
 
 import Posts from './components/Posts';
 import Authentication from './components/Authentication';
+import UserProfile from './components/UserProfile';
 
 
 class App extends Component {
@@ -13,9 +12,16 @@ class App extends Component {
 
     return (
       <main className="Application">
-        <h1>Think Piece</h1>
+        
+        <Link to = '/'>
+          <h1>Think Piece</h1>
+        </Link>
         <Authentication/>
-        <Posts/>
+        <Switch>
+          <Route exact path ='/' component = { Posts } />
+
+          <Route exact path ='/profile' component = { UserProfile } />
+        </Switch>
       </main>
     );
   }

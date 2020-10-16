@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { firestore, auth, createUserProfileDocument } from './firebase';
 import { collectData} from './utils'
 
+
 import Posts from './components/Posts';
 import Authentication from './components/Authentication';
 class App extends Component {

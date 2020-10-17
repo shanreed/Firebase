@@ -60,18 +60,29 @@ var config = {
     return getUserDocument(user.uid);//get it after creations
 };
 
-  export const getUserDocument = async (uid) => {
-        if (!uid) return null;//if no uid
-        //otherwise try to get it from the database
-        try {
-                const userDocument = await firestore.collection('users').doc(uid).get();
-                                  //OR
-            // const userDocument = await firestore.collection('users').doc( `users/${uid}` )
-             return { uid, ...userDocument.data()};
-        }catch(err) {
-        console.error('ERROR FETCHING USER', err.message)
-        }
- }
+//   export const getUserDocument = async (uid) => {
+//         if (!uid) return null;//if no uid
+//         //otherwise try to get it from the database
+//         try {
+//                 const userDocument = await firestore.collection('users').doc(uid).get();
+//                                   //OR
+//             // const userDocument = await firestore.collection('users').doc( `users/${uid}` )
+//              return { uid, ...userDocument.data()};
+//         }catch(err) {
+//         console.error('ERROR FETCHING USER', err.message)
+//         }
+//  }
+
+export const getUserDocument = async (uid) => {
+  if (!uid) return null;//if no uid
+  //otherwise try to get it from the database
+  try {
+          return firestore.collection('users').doc(uid);
+       
+  }catch(err) {
+  console.error('ERROR FETCHING USER', err.message)
+  }
+}
 
 
   export default firebase;

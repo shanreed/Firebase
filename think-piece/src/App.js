@@ -4,7 +4,7 @@ import { Switch, Route, Link} from 'react-router-dom';
 import Posts from './components/Posts';
 import Authentication from './components/Authentication';
 import UserProfile from './components/UserProfile';
-
+import PostDetails from './components/PostDetails';
 
 class App extends Component {
 
@@ -21,6 +21,7 @@ class App extends Component {
           <Route exact path ='/' component = { Posts } />
 
           <Route exact path ='/profile' component = { UserProfile } />
+          <Route exact path ='/post/:id' component = { PostDetails } />
         </Switch>
       </main>
     );

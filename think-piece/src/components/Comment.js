@@ -15,11 +15,11 @@ const Comment = ({ content, user, createdAt }) => {
 Comment.defaultProps = {
   title: 'An Incredibly Hot Take',
   content:
-    'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ducimus est aut dolorem, dolor voluptatem assumenda possimus officia blanditiis iusto porro eaque non ab autem nihil! Alias repudiandae itaque quo provident.',
+    'I love to code',
   user: {
-    displayName: 'Bill Murray',
-    email: 'billmurray@mailinator.com',
-    photoURL: 'https://www.fillmurray.com/300/300',
+    displayName: 'Rita lacey',
+    email: 'ritalacey@mailinator.com',
+    photoURL: 'https://www.ritalacey.com/300/300',
   },
   createdAt: new Date(),
 };

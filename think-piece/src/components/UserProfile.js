@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { firestore, auth } from '../firebase'
+import { firestore, auth, storage } from '../firebase'
 
 class UserProfile extends Component {
       state = {
@@ -18,6 +18,11 @@ class UserProfile extends Component {
 
       }
 
+      get file() {
+         //if imageInput is not null then get me the first file
+            return this.imageInput && this.imageInput.files[0];
+      }
+
       handleChange = e => {
          const {name, value} = e.target;
          this.setState({[name]: value})
@@ -29,6 +34,17 @@ class UserProfile extends Component {
 
          if (displayName) {
             this.userRef.update({displayName});
+         }
+
+         if(this.file) {
+            storage//uses references
+            .ref()//the ref is the top of the storage bucket
+            .child('user-profiles')//using child to navigate into the user profiles
+            .child(this.uid)//only have access to the folder with the uid
+            .child(this.file.name)//name the file
+            .put(this.file)//putting the file in the bucket, returns a promise
+            .then(res => res.ref.getDownloadURL())//get the full url to where the image is
+            .then(photoURL => this.userRef.update({photoURL}))//updating the photoURL
          }
       }
 

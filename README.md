@@ -15,6 +15,10 @@
     - [x] add the get request (componentDidMount)
 - [x] Add to database
     [ ]
+[ ] Delete from database
+[ ] Update the UI whenever the datbase changes
+    - onSnapshot, takes a callback function that runs everytime te data changes 
+    - onSnapshot returns a function you can use to unsubscribe
 - [x] Delete from database
 - [x] Update Ui with database so we wont have to keep fetching the data
 - [x] Adding Stars

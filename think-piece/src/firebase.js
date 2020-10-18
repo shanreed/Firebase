@@ -1,6 +1,7 @@
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
+import 'firebase/storage';
 
 var config = {
     apiKey: "AIzaSyCpOkN7yVjdW_1dJKf8tCH2TyYQJV3iJiY",
@@ -17,7 +18,7 @@ var config = {
 
   export const firestore = firebase.firestore();// firestore
   export const auth = firebase.auth();//auth
-
+  export const storage = firebase.storage();//storage
   export const provider = new firebase.auth.GoogleAuthProvider();//Provider
 
   export const signInWithGoogle = () => auth.signInWithPopup(provider);//function that when called the google pop up window shows
@@ -60,18 +61,16 @@ var config = {
     return getUserDocument(user.uid);//get it after creations
 };
 
-  export const getUserDocument = async (uid) => {
-        if (!uid) return null;//if no uid
-        //otherwise try to get it from the database
-        try {
-                const userDocument = await firestore.collection('users').doc(uid).get();
-                                  //OR
-            // const userDocument = await firestore.collection('users').doc( `users/${uid}` )
-             return { uid, ...userDocument.data()};
-        }catch(err) {
-        console.error('ERROR FETCHING USER', err.message)
-        }
- }
+export const getUserDocument = async (uid) => {
+  if (!uid) return null;//if no uid
+  //otherwise try to get it from the database
+  try {
+          return firestore.collection('users').doc(uid);
+       
+  }catch(err) {
+  console.error('ERROR FETCHING USER', err.message)
+  }
+}
 
 
   export default firebase;
